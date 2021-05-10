@@ -1,4 +1,4 @@
-package com.mbs.tp.gateway;
+package com.mbs.tp_and_iot.gateway;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

@@ -1,5 +1,5 @@
 
-package com.mbs.tp.gateway;
+package com.mbs.tp_and_iot.gateway;
 
 import java.util.Date;
 import java.util.HashMap;

@@ -1,6 +1,6 @@
 
 
-package com.mbs.tp.gateway;
+package com.mbs.tp_and_iot.gateway;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;

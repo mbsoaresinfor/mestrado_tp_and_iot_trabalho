@@ -1,4 +1,4 @@
-package com.mbs.tp.gateway;
+package com.mbs.tp_and_iot.gateway;
 
 import com.mashape.unirest.http.exceptions.UnirestException;
 
