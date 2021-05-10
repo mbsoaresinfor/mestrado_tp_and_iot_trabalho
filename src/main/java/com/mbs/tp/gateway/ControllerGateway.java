@@ -5,6 +5,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * API Rest para atualizacao dos dados referentes aos sensores Nodes.
+ * @author marcelo.soares
+ *
+ */
 
 @RestController
 public class ControllerGateway {

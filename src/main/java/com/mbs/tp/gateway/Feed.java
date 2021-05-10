@@ -28,10 +28,7 @@ public class Feed {
     private final ChannelInfo channel = new ChannelInfo();
     private final ArrayList<Entry> feeds = new ArrayList<>();
 
-    /**
-     * Constructor is package/class private so it can only be created via GSON
-     * and not created directly.
-     */
+   
     private Feed() {
 
     }
