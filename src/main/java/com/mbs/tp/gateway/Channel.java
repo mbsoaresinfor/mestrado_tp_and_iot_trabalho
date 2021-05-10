@@ -9,7 +9,11 @@ import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
 import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.GetRequest;
+
+import java.util.Date;
 import java.util.HashMap;
+
+import org.apache.log4j.Logger;
 
 
 public class Channel {
@@ -22,8 +26,9 @@ public class Channel {
     private Boolean isPublic;
     private final HashMap<String, Object> fields = new HashMap<>();
     private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").create();
-
-  
+    private long lastUpdate;
+    private long intervalUpdate = 20 * 1000;  
+     
     public Channel() {}
 
    
@@ -67,17 +72,27 @@ public class Channel {
     }
 
     public Integer update(Entry entry) throws UnirestException, ThingSpeakException {
-        HttpResponse<String> response = Unirest.post(APIURL + "/update")
-                .header(APIHEADER, this.writeAPIKey)
-                .header("Connection", "close")
-                .fields(entry.getUpdateMap())
-                .asString();
-        if (response.getCode() != 200) {
-            throw new ThingSpeakException("Request failed with code " + response.getCode());
-        } else if (response.getBody().equals("0")) {
-            throw new ThingSpeakException("Update failed.");
-        }
-        return Integer.parseInt(response.getBody());
+        
+    	long dateNow = new Date().getTime();
+    	boolean canUpdate = dateNow  > (lastUpdate + intervalUpdate);
+    	if(canUpdate) {
+	    	HttpResponse<String> response = Unirest.post(APIURL + "/update")
+	                .header(APIHEADER, this.writeAPIKey)
+	                .header("Connection", "close")
+	                .fields(entry.getUpdateMap())
+	                .asString();
+	    	lastUpdate = dateNow; 
+	        if (response.getCode() != 200) {
+	            throw new ThingSpeakException("Request failed with code " + response.getCode());
+	        } else if (response.getBody().equals("0")) {
+	            throw new ThingSpeakException("Update failed.");
+	        }
+	        System.out.println("Update OK, values: " + entry.getUpdateMap());
+	        return Integer.parseInt(response.getBody());
+    	}else {
+    		System.out.println("No update, because dateNow < lastUpdate");
+    		return -1;
+    	}
     }
 
     

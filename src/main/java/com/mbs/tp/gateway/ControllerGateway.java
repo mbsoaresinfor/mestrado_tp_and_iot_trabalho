@@ -14,11 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class ControllerGateway {
 
+	Channel channel = new Channel();
+	
 	@RequestMapping(value = "/update", method = RequestMethod.GET)	 
 	  public void update(@RequestParam(name = "field") String field, 
 			  @RequestParam(name = "value") String value) {
 		
-		Channel channel = new Channel();
 		Entry entry = new Entry();
 		entry.setField(Integer.parseInt(field), value);
 		try {
