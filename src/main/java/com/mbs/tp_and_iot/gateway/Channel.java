@@ -2,8 +2,7 @@
 
 package com.mbs.tp_and_iot.gateway;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
 import com.mashape.unirest.http.HttpResponse;
 import com.mashape.unirest.http.JsonNode;
 import com.mashape.unirest.http.Unirest;
@@ -11,21 +10,11 @@ import com.mashape.unirest.http.exceptions.UnirestException;
 import com.mashape.unirest.request.GetRequest;
 
 import java.util.Date;
-import java.util.HashMap;
-
-import org.apache.log4j.Logger;
 
 
-public class Channel {
+public class Channel extends AbstractChannel{
 
-    private String APIURL = "http://api.thingspeak.com";
-    private static final String APIHEADER = "X-THINGSPEAKAPIKEY";
-    private Integer channelId = 1350904;
-    private String readAPIKey = "C669YRGVI4DF2L03";
-    private String writeAPIKey = "QD4A1OL80XP6Y9K0";
-    private Boolean isPublic;
-    private final HashMap<String, Object> fields = new HashMap<>();
-    private final Gson gson = new GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssXXX").create();
+    
     private long lastUpdate;
     private long intervalUpdate = 20 * 1000;  
      
@@ -33,10 +22,10 @@ public class Channel {
 
    
     public Channel(Integer channelId, String writeKey, String readKey) {
-        this.channelId = channelId;
-        this.readAPIKey = readKey;
-        this.writeAPIKey = writeKey;
-        this.isPublic = false;
+        super.channelId = channelId;
+        super.readAPIKey = readKey;
+        super.writeAPIKey = writeKey;
+        super.isPublic = false;
     }
 
    
@@ -60,6 +49,7 @@ public class Channel {
         }
         request.fields(options.fields);
         HttpResponse<JsonNode> response = request.asJson();
+
         if (response.getCode() != 200) {
             throw new ThingSpeakException("Request failed with code " + response.getCode());
         }

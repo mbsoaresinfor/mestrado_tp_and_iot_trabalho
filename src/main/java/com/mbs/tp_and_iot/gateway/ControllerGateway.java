@@ -20,14 +20,18 @@ public class ControllerGateway {
 	  public void update(@RequestParam(name = "field") String field, 
 			  @RequestParam(name = "value") String value) {
 		
-		Entry entry = new Entry();
-		entry.setField(Integer.parseInt(field), value);
 		try {
-			channel.update(entry);
+			processUpdate(field,value);
 		} catch (Exception e) {
 			System.err.println("Error update " + e.getMessage());
 			e.printStackTrace();
 		} 
 		 
 	 }
+	
+	private void processUpdate(String field, String value) throws Exception{
+		Entry entry = new Entry();
+		entry.setField(Integer.parseInt(field), value);
+		channel.update(entry);
+	}
 }

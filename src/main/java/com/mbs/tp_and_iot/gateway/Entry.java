@@ -19,9 +19,7 @@ public class Entry {
     private Double latitude;
     private Double longitude;
     private Double elevation;
-    private String status;
-    private String twitter;
-    private String tweet;
+    private String status;    
     
     private final HashMap<String, Object> updateMap = new HashMap<>();
 
@@ -135,18 +133,6 @@ public class Entry {
         updateMap.put("status", status);
     }
     
-    
-    public void setTwitter(String twitter) {
-        this.twitter = twitter;
-        updateMap.put("twitter", twitter);
-    }
-
-    
-    public void setTweet(String tweet) {
-        this.tweet = tweet;
-        updateMap.put("tweet", tweet);
-    }
-
     
     public void setCreated(Date created) {
         this.created_at = created;
