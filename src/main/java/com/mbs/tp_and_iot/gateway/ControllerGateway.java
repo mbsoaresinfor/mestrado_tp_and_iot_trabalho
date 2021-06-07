@@ -30,6 +30,7 @@ public class ControllerGateway {
 	 }
 	
 	private void processUpdate(String field, String value) throws Exception{
+		System.out.println("\nPackage: field=" + field + " value=" + value);
 		Entry entry = new Entry();
 		entry.setField(Integer.parseInt(field), value);
 		channel.update(entry);

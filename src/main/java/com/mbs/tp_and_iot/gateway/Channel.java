@@ -77,10 +77,10 @@ public class Channel extends AbstractChannel{
 	        } else if (response.getBody().equals("0")) {
 	            throw new ThingSpeakException("Update failed.");
 	        }
-	        System.out.println("Update OK, values: " + entry.getUpdateMap());
+	        System.out.println("OK Update, values: " + entry.getUpdateMap());
 	        return Integer.parseInt(response.getBody());
     	}else {
-    		System.out.println("No update, because dateNow < lastUpdate");
+    		System.out.println("NO update, because dateNow < lastUpdate");
     		return -1;
     	}
     }
